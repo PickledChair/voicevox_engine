@@ -569,7 +569,8 @@ jobs:
           # '-' means psuedo identity.
           # cf. https://developer.apple.com/documentation/security/seccodesignatureflags/1397793-adhoc
           # cf. https://github.com/google/mozc/issues/791#issuecomment-2084207495
-          codesign --force --sign - dist/run/run
+          cd dist/run
+          codesign --force --sign - run
 
       - name: <Build> Rename artifact directory to archive
         run: mv dist/run/ "${{ matrix.target }}/"
