@@ -565,11 +565,9 @@ jobs:
 
       - name: <Build> Code signing with ad-hoc signature
         if: matrix.target == 'macos-arm64'
-        run: |
-          # '-' means psuedo identity.
-          # cf. https://developer.apple.com/documentation/security/seccodesignatureflags/1397793-adhoc
-          # cf. https://github.com/google/mozc/issues/791#issuecomment-2084207495
-          codesign --force --sign - dist/run/run || true
+        uses: indygreg/apple-code-sign-action@v1
+        with:
+          input_path: dist/run/run
 
       - name: <Build> Rename artifact directory to archive
         run: mv dist/run/ "${{ matrix.target }}/"
